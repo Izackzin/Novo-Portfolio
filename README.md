@@ -49,7 +49,7 @@ Estudante de Engenharia de Software que une lógica e estética. Quero criar sol
 
 Site pessoal bilíngue (PT/EN), com tema claro e escuro, animações, linha do tempo e visualizador de certificados. Feito sem frameworks e publicado no GitHub Pages.
 
-[<img src="https://img.shields.io/badge/ACESSAR_REPOSIT%C3%93RIO-B93A0B?style=for-the-badge&logo=github&logoColor=white" alt="Acessar repositório">](https://github.com/Izackzin/Portfolio-Isaac-Ramos) [<img src="https://img.shields.io/badge/VER_SITE-111111?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Ver site">](https://izackzin.github.io/Portfolio-Isaac-Ramos/)
+[<img src="https://img.shields.io/badge/ACESSAR_REPOSIT%C3%93RIO-B93A0B?style=for-the-badge&logo=github&logoColor=white" alt="Acessar repositório">](https://izackzin.github.io/Portfolio-Isaac/) [<img src="https://img.shields.io/badge/VER_SITE-111111?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Ver site">](https://github.com/Izackzin/Portfolio-Isaac)
 
 <br>
 
