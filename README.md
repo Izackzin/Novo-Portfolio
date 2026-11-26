@@ -8,7 +8,7 @@
 <a href="https://www.linkedin.com/in/isaac-ramos-4616b9368/"><img src="https://img.shields.io/badge/LINKEDIN-B93A0B?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
 <a href="https://github.com/Izackzin"><img src="https://img.shields.io/badge/GITHUB-111111?style=flat-square&logo=github&logoColor=white" alt="GitHub"></a>
 <a href="https://www.instagram.com/isaac.rmz1/"><img src="https://img.shields.io/badge/INSTAGRAM-B93A0B?style=flat-square&logo=instagram&logoColor=white" alt="Instagram"></a>
-<a href="https://izackzin.github.io/Portfolio-Isaac-Ramos/"><img src="https://img.shields.io/badge/PORTF%C3%93LIO-111111?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfólio"></a>
+<a href="https://izackzin.github.io/Portfolio-Isaac/"><img src="https://img.shields.io/badge/PORTF%C3%93LIO-111111?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfólio"></a>
 
 <br><br>
 
