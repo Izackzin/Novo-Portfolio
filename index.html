@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Isaac Ramos — Portfólio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F1EFE8;--ink:#111111;--card:#FBFAF6;--accent:#B93A0B;--hot:#F28A5B;--onink:#F1EFE8;--onacc:#FFFFFF;--grain:.07;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151412;--ink:#F1EFE8;--card:#1E1C1A;--accent:#F28A5B;--onink:#151412;--onacc:#151412;--grain:0}}
+:root[data-theme="dark"]{--bg:#151412;--ink:#F1EFE8;--card:#1E1C1A;--accent:#F28A5B;--onink:#151412;--onacc:#151412;--grain:0}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Poppins',system-ui,sans-serif;line-height:1.6;font-size:16px;overflow-x:hidden;position:relative}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:var(--grain);z-index:50;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#pg{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:5px;width:0;background:var(--accent);z-index:40}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:31;background:var(--bg);border-bottom:3px solid var(--ink)}
+nav .wrap{display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.logo{font-weight:800;font-size:22px;text-decoration:none;margin-right:auto}
+.logo i{font-style:normal;color:var(--accent)}
+nav a.l{font-weight:600;font-size:14px;text-decoration:none;border-bottom:2px solid transparent}
+nav a.l:hover{border-color:var(--accent)}
+.tb{font:inherit;font-weight:700;font-size:13px;background:var(--ink);color:var(--onink);border:0;padding:6px 12px;cursor:pointer}
+section{padding:70px 0 8px}
+h2{margin:0 0 28px;font-size:clamp(30px,5vw,46px);line-height:1.05;font-weight:800;letter-spacing:-.02em}
+h2 span{background:var(--accent);color:var(--onacc);padding:0 10px;display:inline-block;transform:rotate(-1.5deg)}
+h3{margin:0;font-size:17px;line-height:1.3}
+p{margin:0 0 12px;max-width:68ch}
+.box{background:var(--card);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);transition:transform .2s,box-shadow .2s}
+.box:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.hero{display:grid;grid-template-columns:1fr 280px;margin-top:44px;position:relative}
+.hero:hover{transform:none;box-shadow:6px 6px 0 var(--ink)}
+.hero .main{padding:34px 30px}
+.hero h1{margin:0 0 14px;font-size:clamp(48px,10vw,100px);line-height:.92;font-weight:800;letter-spacing:-.035em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.stk{position:absolute;top:-20px;left:18px;transform:rotate(-4deg);background:var(--accent);color:var(--onacc);font-weight:700;font-size:14px;padding:5px 14px;border:3px solid var(--ink);z-index:2}
+.avail{display:inline-block;border:2px solid var(--ink);padding:2px 12px;font-weight:600;font-size:14px;margin-bottom:18px;background:var(--bg)}
+.avail::before{content:"";display:inline-block;width:9px;height:9px;background:var(--accent);margin-right:8px;animation:bl 1.6s steps(2) infinite}
+@keyframes bl{50%{opacity:.2}}
+.side{display:flex;flex-direction:column;border-left:3px solid var(--ink)}
+.side .roles{flex:1}
+.photo{position:relative;aspect-ratio:4/5;background:var(--card);overflow:hidden;border-bottom:3px solid var(--ink)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block}
+.photo span{display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-size:80px;font-weight:800;color:var(--accent)}
+.photo.empty img{display:none}.photo.empty span{display:flex}
+.roles{background:var(--ink);color:var(--onink);padding:26px 24px;display:flex;flex-direction:column;justify-content:center;gap:6px;font-size:21px;font-weight:700;line-height:1.25}
+.roles span:nth-child(2){color:var(--hot)}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-block;font:inherit;font-weight:700;font-size:16px;text-decoration:none;padding:10px 20px;border:3px solid var(--ink);cursor:pointer;color:var(--ink);background:var(--bg)}
+.btn.p{background:var(--accent);color:var(--onacc)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+.mqw{overflow:hidden;padding:26px 0 8px;margin-top:30px}
+.mq{background:var(--ink);color:var(--onink);border-block:3px solid var(--ink);transform:rotate(-1.2deg);overflow:hidden}
+.mq div{display:flex;width:max-content;animation:mq 30s linear infinite}
+.mq span{padding:12px 22px;font-weight:800;font-size:22px;white-space:nowrap}
+.mq span:nth-child(even){color:var(--hot)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border:3px solid var(--ink);background:var(--card);margin-top:50px}
+.st{padding:22px;border-right:3px solid var(--ink)}
+.st:last-child{border-right:0}
+.st b{display:block;font-size:52px;line-height:1;font-weight:800;color:var(--accent)}
+.st span{font-weight:600;font-size:14px}
+.grid{display:grid;gap:22px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:26px}
+.pad{padding:22px}
+.pad p,.tl p{font-size:15px;margin:6px 0 0}
+.tag{display:inline-block;border:2px solid var(--ink);padding:2px 12px;font-weight:600;font-size:14px;margin:0 6px 8px 0;background:var(--bg)}
+.sk{border-top-width:10px;border-top-color:var(--accent)}
+.sk:nth-child(even){border-top-color:var(--ink)}
+.sk h3{margin-top:4px}
+.tl{border-left:3px solid var(--ink);padding-left:34px;margin-left:8px}
+.it{position:relative;padding:0 0 34px}
+.it::before{content:"";position:absolute;left:-46px;top:6px;width:16px;height:16px;background:var(--accent);border:3px solid var(--ink)}
+.yr{display:inline-block;background:var(--ink);color:var(--onink);font-weight:700;font-size:13px;padding:1px 10px;margin-bottom:6px}
+.cl{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 24px;margin-top:12px}
+.cl div{display:flex;gap:12px;padding:7px 0;border-top:1px solid var(--ink);font-size:14px}
+.cl b{min-width:38px;color:var(--accent)}
+.cert{position:relative;padding:22px}
+.cert .h{position:absolute;top:-3px;right:-3px;background:var(--accent);color:var(--onacc);font-weight:800;font-size:14px;padding:3px 12px;border:3px solid var(--ink)}
+.cert h3{padding-right:62px}
+.cert .o{font-size:14px;font-weight:600;color:var(--accent);margin:2px 0 0}
+.view{font:inherit;font-weight:700;font-size:14px;margin-top:8px;background:var(--ink);color:var(--onink);border:0;padding:8px 16px;cursor:pointer}
+.view:hover{background:var(--accent);color:var(--onacc)}
+.hb{padding:22px;font-weight:800;font-size:24px}
+.hb p{font-size:15px;font-weight:500;margin:4px 0 0}
+.hb:nth-child(1){transform:rotate(-1.5deg)}.hb:nth-child(2){transform:rotate(1deg)}.hb:nth-child(3){transform:rotate(-.8deg)}
+.cta{background:var(--ink);color:var(--onink);padding:44px 30px;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--accent)}
+.cta h2{color:var(--onink);margin-bottom:14px}
+.cta .btn{border-color:var(--onink)}
+.cta .btn.p{border-color:var(--onink)}
+.cta .btn:not(.p){background:transparent;color:var(--onink)}
+.cta .btn:hover{box-shadow:4px 4px 0 var(--hot)}
+footer{margin-top:60px;padding:20px 0 28px;border-top:3px solid var(--ink);font-size:14px;font-weight:500}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.tab{font:inherit;font-weight:600;font-size:14px;padding:5px 14px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--ink);color:var(--onink)}
+.psearch{font:inherit;width:100%;max-width:360px;padding:9px 12px;border:3px solid var(--ink);background:var(--card);color:var(--ink)}
+.small{font-size:15px}
+dialog{width:min(960px,94vw);max-height:92vh;padding:0;border:3px solid var(--ink);background:var(--card);color:var(--ink);box-shadow:8px 8px 0 var(--ink)}
+dialog::backdrop{background:rgba(17,17,17,.7)}
+dialog .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;border-bottom:3px solid var(--ink);font-weight:700}
+dialog .bar button{font:inherit;font-weight:700;font-size:14px;background:var(--ink);color:var(--onink);border:0;padding:6px 14px;cursor:pointer}
+dialog img{display:block;width:100%;height:auto;max-height:calc(92vh - 60px);object-fit:contain;background:#fff}
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .6s,transform .6s}
+.js .rv.in{opacity:1;transform:none}
+@media (max-width:760px){.hero,.about{grid-template-columns:1fr}.side{border-left:0;border-top:3px solid var(--ink)}.photo{aspect-ratio:1/1}.st{border-right:0;border-bottom:3px solid var(--ink)}.st:last-child{border-bottom:0}.roles{font-size:19px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.mq div,.avail::before{animation:none}.js .rv{opacity:1;transform:none;transition:none}.btn:hover,.box:hover{transform:none}}
+</style>
+</head>
+<body>
+<div id="pg"></div>
+<nav><div class="wrap">
+<a class="logo" href="#hero">Isaac<i>.</i></a>
+<a class="l" href="#about" data-en="About">Sobre</a>
+<a class="l" href="#skills">Skills</a>
+<a class="l" href="#projects" data-en="Projects">Projetos</a>
+<a class="l" href="#experience" data-en="Experience">Experiência</a>
+<a class="l" href="#certificates" data-en="Certificates">Certificados</a>
+<a class="l" href="#contact" data-en="Contact">Contato</a>
+<button class="tb" id="theme" type="button" aria-label="Tema / Theme">◐</button>
+<button class="tb" id="lang" type="button" aria-label="Idioma / Language">EN</button>
+</div></nav>
+
+<main>
+<div class="wrap">
+<div class="hero box" id="hero">
+<span class="stk" data-en="Portfolio 2026">Portfólio 2026</span>
+<div class="main">
+<span class="avail" data-en="Available for new projects">Disponível para novos projetos</span>
+<h1>Isaac <em>Ramos</em></h1>
+<p data-en="Software Engineering student at UniCEUB. Full stack developer, graphic designer since age 13 and founder of Osprey Aerial Solutions. I build solutions where code and aesthetics meet.">Estudante de Engenharia de Software no UniCEUB. Desenvolvedor full stack, designer gráfico desde os 13 anos e fundador da Osprey Aerial Solutions. Crio soluções onde código e estética se encontram.</p>
+<div class="btns"><a class="btn p" href="#contact" data-en="Let’s talk">Vamos conversar</a><a class="btn" href="#experience" data-en="See experience">Ver experiência</a></div>
+</div>
+<div class="side"><div class="photo"><img src="foto.jpg" alt="Isaac Ramos" onerror="this.parentNode.classList.add('empty')"><span>IR</span></div>
+<div class="roles"><span data-en="Software Engineering Student">Engenheiro de Software em formação</span><span data-en="Graphic Designer">Designer Gráfico</span><span data-en="Video Editor">Editor de Vídeo</span></div></div>
+</div>
+</div>
+
+<div class="mqw" aria-hidden="true"><div class="mq"><div>
+<span>Design gráfico</span><span>Full stack</span><span>Edição de vídeo</span><span>Python</span><span>Branding</span><span>C++</span><span>Drone</span><span>Identidade visual</span>
+<span>Design gráfico</span><span>Full stack</span><span>Edição de vídeo</span><span>Python</span><span>Branding</span><span>C++</span><span>Drone</span><span>Identidade visual</span>
+</div></div></div>
+
+<div class="wrap">
+<div class="stats rv">
+<div class="st"><b data-n="6" data-s="+">0</b><span data-en="years of design and editing">anos de design e edição</span></div>
+<div class="st"><b data-n="9">0</b><span data-en="clients served">clientes atendidos</span></div>
+<div class="st"><b data-n="7">0</b><span data-en="certificates">certificados</span></div>
+<div class="st"><b data-n="300" data-s="+">0</b><span data-en="hours of courses">horas de cursos</span></div>
+</div>
+
+<section id="about">
+<h2 class="rv"><span data-en="About me">Sobre mim</span></h2>
+<div class="about rv">
+<div class="box pad"><h3 data-en="Where it started">Como começou</h3>
+<p data-en="I dreamed of making games since I was a kid. At 12 I took a course that introduced me to programming and design, and that decided my path.">Desde pequeno sonhava em criar jogos. Aos 12 anos fiz um curso que me apresentou a programação e ao design, e isso definiu meu caminho.</p>
+<h3 style="margin-top:18px" data-en="What I do today">O que faço hoje</h3>
+<p data-en="I work as a full stack developer, joining the logic of the backend with the look of the frontend. In parallel, I design and edit video for clients.">Atuo como desenvolvedor full stack, unindo a lógica do backend à estética do frontend. Em paralelo, faço design e edição de vídeo para clientes.</p></div>
+<div class="box pad"><h3 data-en="Quick profile">Ficha rápida</h3>
+<p><b data-en="Studying:">Estudando:</b> <span data-en="Software Engineering, CEUB">Engenharia de Software, CEUB</span></p>
+<p><b data-en="Based in:">Mora em:</b> <span data-en="Brasília, Brazil">Brasília, DF</span></p>
+<p><b data-en="Founder of:">Fundador da:</b> Osprey Aerial Solutions</p>
+<p><b data-en="Off screen:">Fora da tela:</b> <span data-en="soccer, jiu-jitsu and gym">futebol, jiu-jitsu e academia</span></p>
+<div style="margin-top:12px"><span class="tag">Python</span><span class="tag">C++</span><span class="tag">C#</span><span class="tag">Full stack</span></div></div>
+</div>
+</section>
+
+<section id="skills">
+<h2 class="rv"><span>Skills</span></h2>
+<div class="grid g4">
+<div class="box pad sk rv"><h3 data-en="Full stack development">Desenvolvimento full stack</h3><p data-en="Frontend and backend working together.">Frontend e backend integrados.</p></div>
+<div class="box pad sk rv"><h3 data-en="Graphic design">Design gráfico</h3><p data-en="Visual identity, branding and visual hierarchy. Working in the field since 2020.">Identidade visual, branding e hierarquia visual. Atuando desde 2020.</p></div>
+<div class="box pad sk rv"><h3 data-en="Video editing">Edição de vídeo</h3><p data-en="Professional experience with clients across many areas.">Experiência profissional com clientes de várias áreas.</p></div>
+<div class="box pad sk rv"><h3 data-en="Python and C++">Python e C++</h3><p data-en="Problem solving and automation.">Resolução de problemas e automação.</p></div>
+</div>
+</section>
+
+<section id="experience">
+<h2 class="rv"><span data-en="Experience">Experiência</span></h2>
+<div class="tl">
+<div class="it rv"><span class="yr" data-en="2026 – present">2026 – hoje</span><h3>Osprey Aerial Solutions · <span data-en="Founder">Fundador</span></h3><p data-en="My own drone flight company: operation, aerial footage, editing and overall management of the business.">Minha empresa de voo de drone: operação, captação de imagens aéreas, edição e gestão geral do negócio.</p></div>
+<div class="it rv"><span class="yr" data-en="2026 – ongoing">2026 – em andamento</span><h3 data-en="Software Engineering · UniCEUB">Engenharia de Software · UniCEUB</h3><p data-en="Focus on full stack development, data structures and software engineering. Class Representative in the 1st and 2nd semesters of 2026.">Foco em desenvolvimento full stack, estruturas de dados e engenharia de software. Representante de Turma no 1º e 2º semestres de 2026.</p></div>
+<div class="it rv"><span class="yr">2025 – 2026</span><h3>LATAM Airlines · <span data-en="Administrative Assistant">Assistente Administrativo</span></h3><p data-en="Logistics, teamwork and adaptation to a dynamic corporate environment.">Logística, trabalho em equipe e adaptação a um ambiente corporativo dinâmico.</p></div>
+<div class="it rv"><span class="yr" data-en="2020 – present">2020 – hoje</span><h3 data-en="Freelance Designer and Video Editor">Designer Gráfico e Editor de Vídeo Freelancer</h3><p data-en="Visual identity, branding, graphic design and video editing. Some of the clients:">Identidade visual, branding, design gráfico e edição de vídeo. Alguns clientes:</p>
+<div class="cl">
+<div><b>2026</b><span>Igreja Núcleo da Fé</span></div><div><b>2025</b><span>Plano Imob</span></div><div><b>2025</b><span>OKTA</span></div><div><b>2024</b><span>Super Lab</span></div><div><b>2024</b><span>Plano Imob</span></div><div><b>2024</b><span>Torklaw</span></div><div><b>2023</b><span>Acauã Alves</span></div><div><b>2023</b><span>Essencial</span></div><div><b>2023</b><span>Firstsource</span></div><div><b>2022</b><span>Orafagod</span></div><div><b>2022</b><span>Essencial</span></div>
+</div></div>
+<div class="it rv"><span class="yr">2018</span><h3 data-en="First contact with programming">Primeiro contato com programação</h3><p data-en="A course at 12 introduced me to programming and design.">Um curso aos 12 anos me apresentou a programação e ao design.</p></div>
+</div>
+</section>
+
+<section id="projects">
+<h2 class="rv"><span data-en="Projects">Projetos</span></h2>
+<div class="pbar" id="pabas"><button class="tab" data-cat="Todos" aria-pressed="true" data-en="All">Todos</button><button class="tab" data-cat="Desenvolvimento" aria-pressed="false" data-en="Development">Desenvolvimento</button><button class="tab" data-cat="Design" aria-pressed="false">Design</button><button class="tab" data-cat="Vídeo" aria-pressed="false" data-en="Video">Vídeo</button></div>
+<input class="psearch" id="psearch" type="search" placeholder="Buscar projetos" aria-label="Buscar projetos">
+<div class="grid g3" id="plist" style="margin-top:22px"></div>
+</section>
+
+<section id="certificates">
+<h2 class="rv"><span data-en="Certificates">Certificados</span></h2>
+<div class="grid g3" id="clist"></div>
+</section>
+
+<section id="hobbies">
+<h2 class="rv"><span>Hobbies</span></h2>
+<div class="grid g3">
+<div class="box hb rv"><span data-en="Soccer">Futebol</span><p data-en="On the pitch whenever possible.">Sempre que possível, em campo.</p></div>
+<div class="box hb rv">Jiu-Jitsu<p data-en="Discipline and resilience.">Disciplina e superação.</p></div>
+<div class="box hb rv"><span data-en="Gym">Academia</span><p data-en="Regular training and focus.">Treino regular e foco.</p></div>
+</div>
+</section>
+
+<section id="contact">
+<div class="cta rv">
+<h2 data-en="Let’s talk?">Vamos conversar?</h2>
+<p data-en="Open to opportunities and projects in development, design and video.">Aberto a oportunidades e projetos em desenvolvimento, design e vídeo.</p>
+<div class="btns">
+<a class="btn p" href="mailto:isaacramosrk@gmail.com">isaacramosrk@gmail.com</a>
+<button class="btn" type="button" id="copy" data-en="Copy e-mail">Copiar e-mail</button>
+<a class="btn" href="https://www.linkedin.com/in/isaac-ramos-4616b9368/">LinkedIn</a>
+<a class="btn" href="https://github.com/Izackzin">GitHub</a>
+<a class="btn" href="https://www.instagram.com/isaac.rmz1/">Instagram</a>
+</div></div>
+</section>
+</div>
+</main>
+<footer><div class="wrap"><span data-en="Made by Isaac Ramos · 2026">Feito por Isaac Ramos · 2026</span><a href="login.html" data-en="Restricted area">Área restrita</a><a href="#hero" data-en="Back to top ↑">Voltar ao topo ↑</a></div></footer>
+
+<dialog id="cdlg" aria-labelledby="ctitle"><div class="bar"><span id="ctitle"></span><button type="button" id="cclose" data-en="Close">Fechar</button></div><img id="cimg" alt=""></dialog>
+
+<script src="dados.js"></script>
+<script>
+(function(){
+var cat='Todos',q=document.getElementById('psearch'),g=document.getElementById('plist'),cl=document.getElementById('clist'),P=[],C=[];
+function projetos(){
+var d=filtrar(P.filter(function(p){return p.visivel}),cat,q.value);
+g.replaceChildren();
+if(!d.length){g.appendChild(el('p',null,en()?'No projects found.':'Nenhum projeto encontrado.'));return}
+d.forEach(function(p){g.appendChild(cartao(p))})}
+function abrir(c){var im=document.getElementById('cimg');document.getElementById('ctitle').textContent=(en()&&c.tituloEn)||c.titulo;im.src=c.img;im.alt=c.titulo;document.getElementById('cdlg').showModal()}
+function certs(){
+cl.replaceChildren();
+if(!C.length){cl.appendChild(el('p',null,en()?'No certificates yet.':'Nenhum certificado ainda.'));return}
+C.forEach(function(c){cl.appendChild(cartaoCert(c,abrir))})}
+abas(document.getElementById('pabas'),function(c){cat=c;projetos()});
+q.addEventListener('input',projetos);
+document.addEventListener('idioma',function(){projetos();certs()});
+carregarJSON('projetos.json',PADRAO_PROJ).then(function(l){P=l;projetos()});
+carregarJSON('certificados.json',PADRAO_CERT).then(function(l){C=l;certs();
+var b=document.querySelectorAll('.st b')[2];if(b){b.dataset.n=l.length;if(b.textContent!=='0')b.textContent=l.length}});
+})();
+</script>
+<script>
+document.documentElement.classList.add('js');
+(function(){
+var d=document,R=d.documentElement,en=false;
+var els=d.querySelectorAll('[data-en]');
+els.forEach(function(e){e.setAttribute('data-pt',e.innerHTML)});
+var lb=d.getElementById('lang'),cp=d.getElementById('copy');
+lb.addEventListener('click',function(){
+en=!en;
+els.forEach(function(e){e.innerHTML=e.getAttribute(en?'data-en':'data-pt')});
+R.lang=en?'en':'pt-BR';lb.textContent=en?'PT':'EN';d.dispatchEvent(new Event('idioma'));
+});
+d.getElementById('theme').addEventListener('click',function(){
+var dark=R.getAttribute('data-theme')?R.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+R.setAttribute('data-theme',dark?'light':'dark');
+});
+var pg=d.getElementById('pg');
+addEventListener('scroll',function(){
+var h=R.scrollHeight-innerHeight;pg.style.width=(h>0?scrollY/h*100:0)+'%';
+},{passive:true});
+var still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function count(b){
+var n=+b.dataset.n,s=b.dataset.s||'';
+if(still){b.textContent=n+s;return}
+var t0=null;
+function f(t){if(!t0)t0=t;var k=Math.min((t-t0)/1200,1);b.textContent=Math.round(n*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(f)}
+requestAnimationFrame(f);
+}
+var cs=d.querySelectorAll('.st b');
+if('IntersectionObserver' in window){
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll&&e.target.querySelectorAll('.st b').forEach(count);io.unobserve(e.target)}
+})},{threshold:.15});
+d.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
+}else{
+d.querySelectorAll('.rv').forEach(function(e){e.classList.add('in')});cs.forEach(count);
+}
+var dlg=d.getElementById('cdlg');
+d.getElementById('cclose').addEventListener('click',function(){dlg.close()});
+dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+cp.addEventListener('click',function(){
+var old=cp.innerHTML;
+try{navigator.clipboard.writeText('isaacramosrk@gmail.com')}catch(x){}
+cp.textContent=en?'Copied!':'Copiado!';
+setTimeout(function(){cp.innerHTML=old},1600);
+});
+})();
+</script>
+</body>
+</html>
