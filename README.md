@@ -45,7 +45,7 @@ Estudante de Engenharia de Software que une lógica e estética. Quero criar sol
 <br>
 
 ### Portfólio Web
-<img src="https://img.shields.io/badge/HTML%2FCSS%2FJS-111111?style=flat-square" alt="HTML/CSS/JS"> <img src="https://img.shields.io/badge/STATUS-ACTIVE-B93A0B?style=flat-square&labelColor=555555" alt="Status: active">
+<img src="https://izackzin.github.io/Portfolio-Isaac/" alt="HTML/CSS/JS"> <img src="https://img.shields.io/badge/STATUS-ACTIVE-B93A0B?style=flat-square&labelColor=555555" alt="Status: active">
 
 Site pessoal bilíngue (PT/EN), com tema claro e escuro, animações, linha do tempo e visualizador de certificados. Feito sem frameworks e publicado no GitHub Pages.
 
