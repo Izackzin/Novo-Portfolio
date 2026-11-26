@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel — Isaac Ramos</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="painel.css">
+</head>
+<body>
+<main class="wrap">
+<div class="top"><h1>Painel do site</h1>
+<div class="row"><a class="btn" href="index.html">Ver site</a><button class="btn p" id="sair" type="button">Sair</button></div></div>
+<div class="box row" style="justify-content:space-between;position:sticky;top:8px;z-index:5;margin-bottom:22px">
+<span id="status" role="status" style="font-weight:600">Conectando ao GitHub…</span>
+<button class="btn p" id="pub" type="button" disabled>Publicar alterações</button></div>
+<div class="row" id="abas"><button class="tab" data-cat="proj" aria-pressed="true">Projetos</button><button class="tab" data-cat="cert" aria-pressed="false">Certificados</button></div>
+
+<section id="s-proj" style="margin-top:22px">
+<div class="box"><h2 id="ft">Novo projeto</h2>
+<form id="fp" novalidate>
+<input type="hidden" id="pid">
+<label for="titulo">Título</label><input id="titulo" maxlength="60">
+<label for="desc">Descrição</label><textarea id="desc" rows="3" maxlength="220"></textarea>
+<div class="row" style="align-items:flex-start">
+<div style="flex:1;min-width:180px"><label for="cat">Categoria</label><select id="cat"><option>Desenvolvimento</option><option>Design</option><option>Vídeo</option></select></div>
+<div style="flex:1;min-width:180px"><label for="status2">Status</label><select id="status2"><option>Ativo</option><option>Em andamento</option><option>Concluído</option></select></div></div>
+<label for="tec">Tecnologias (separadas por vírgula)</label><input id="tec" maxlength="80">
+<label for="link">Link (opcional, começa com https://)</label><input id="link" type="url">
+<label style="display:flex;gap:10px;align-items:center"><input id="vis" type="checkbox" checked style="width:auto"> Mostrar no site</label>
+<p class="msg" id="mp" role="alert"></p>
+<div class="row"><button class="btn p" type="submit" id="sp">Adicionar projeto</button><button class="btn" type="button" id="cp" hidden>Cancelar edição</button></div>
+</form></div>
+<h2 style="margin-top:30px">Projetos cadastrados</h2>
+<div class="grid" id="lp"></div>
+</section>
+
+<section id="s-cert" style="margin-top:22px" hidden>
+<div class="box"><h2 id="ft2">Novo certificado</h2>
+<form id="fc" novalidate>
+<input type="hidden" id="cid">
+<label for="ct">Título</label><input id="ct" maxlength="60">
+<label for="co">Instituição e ano</label><input id="co" maxlength="80" placeholder="Ex.: Fundação Bradesco · 2026">
+<label for="ch">Carga horária (horas)</label><input id="ch" type="number" min="1" max="2000">
+<label for="cd">Descrição</label><textarea id="cd" rows="3" maxlength="220"></textarea>
+<label for="ce">Descrição em inglês (opcional)</label><textarea id="ce" rows="2" maxlength="220"></textarea>
+<label for="cf">Arquivo do certificado (imagem JPG/PNG ou PDF, até 5 MB)</label><input id="cf" type="file" accept="image/*,application/pdf">
+<p class="small" id="ci"></p>
+<p class="msg" id="mc" role="alert"></p>
+<div class="row"><button class="btn p" type="submit" id="sc">Adicionar certificado</button><button class="btn" type="button" id="cc" hidden>Cancelar edição</button></div>
+</form></div>
+<h2 style="margin-top:30px">Certificados cadastrados</h2>
+<div class="grid" id="lc"></div>
+</section>
+</main>
+<script src="dados.js"></script>
+<script>
+var T=token(),$=function(i){return document.getElementById(i)};
+if(!T)location.replace('login.html');
+var BR='main',RP='/repos/'+OWNER+'/'+REPO,NOVOS={},D={proj:{arq:'projetos',items:[],sha:null,dirty:false},cert:{arq:'certificados',items:[],sha:null,dirty:false}};
+function api(p,o){o=o||{};o.headers=Object.assign({Authorization:'Bearer '+T,Accept:'application/vnd.github+json'},o.headers||{});
+return fetch('https://api.github.com'+p,o).then(function(r){return r.json().then(function(j){if(!r.ok){var e=new Error(j.message||('Erro '+r.status));e.status=r.status;throw e}return j})})}
+function b64(s){return btoa(unescape(encodeURIComponent(s)))}
+function deb64(s){return decodeURIComponent(escape(atob(s.replace(/\n/g,''))))}
+function copia(o){return JSON.parse(JSON.stringify(o))}
+function marcar(k){D[k].dirty=true;barra()}
+function barra(){var n=D.proj.dirty||D.cert.dirty;$('pub').disabled=!n;if(n)$('status').textContent='Há alterações que ainda não estão no site.'}
+function sair(){try{sessionStorage.removeItem(TOKEN_KEY);localStorage.removeItem(TOKEN_KEY)}catch(e){}location.href='login.html'}
+function ler(k,pad){return api(RP+'/contents/data/'+D[k].arq+'.json?ref='+BR).then(function(j){D[k].sha=j.sha;D[k].items=JSON.parse(deb64(j.content))}).catch(function(e){if(e.status===404){D[k].items=copia(pad);D[k].dirty=true}else throw e})}
+api(RP).then(function(r){BR=r.default_branch;return Promise.all([ler('proj',PADRAO_PROJ),ler('cert',PADRAO_CERT)])}).then(function(){$('status').textContent='Conectado. Tudo publicado.';barra();dp();dc()}).catch(function(e){
+if(e.status===401){sair();return}
+$('status').textContent='Não foi possível conectar: '+e.message+' (confira OWNER e REPO em dados.js)'});
+async function publicar(){
+$('pub').disabled=true;$('status').textContent='Publicando…';
+var H={'Content-Type':'application/json'};
+try{
+for(var p in NOVOS){if(NOVOS[p].enviado)continue;await api(RP+'/contents/'+p,{method:'PUT',headers:H,body:JSON.stringify({message:'Painel: adiciona '+p,content:NOVOS[p].b64,branch:BR})});NOVOS[p].enviado=true}
+for(var k in D){if(!D[k].dirty)continue;
+var body={message:'Painel: atualiza '+D[k].arq,content:b64(JSON.stringify(D[k].items,null,1)),branch:BR};if(D[k].sha)body.sha=D[k].sha;
+var r=await api(RP+'/contents/data/'+D[k].arq+'.json',{method:'PUT',headers:H,body:JSON.stringify(body)});D[k].sha=r.content.sha;D[k].dirty=false}
+$('status').textContent='Publicado! O site pode levar 1 a 2 minutos para mostrar as mudanças.'
+}catch(e){$('status').textContent='Erro ao publicar: '+e.message+(e.status===409?' (o arquivo mudou no GitHub; recarregue a página)':'')}
+barra()}
+$('pub').onclick=publicar;$('sair').onclick=sair;
+addEventListener('beforeunload',function(e){if(D.proj.dirty||D.cert.dirty){e.preventDefault();e.returnValue=''}});
+abas($('abas'),function(c){$('s-proj').hidden=c!=='proj';$('s-cert').hidden=c!=='cert'});
+function prox(){return D.proj.items.reduce(function(m,p){return Math.max(m,p.id)},0)+1}
+function limpaP(){$('fp').reset();$('pid').value='';$('ft').textContent='Novo projeto';$('sp').textContent='Adicionar projeto';$('cp').hidden=true;$('mp').textContent='';$('vis').checked=true}
+function dp(){
+var g=$('lp');g.replaceChildren();var L=D.proj.items;
+if(!L.length){g.appendChild(el('p',null,'Nenhum projeto ainda. Use o formulário acima para adicionar o primeiro.'));return}
+L.forEach(function(p){
+var c=cartao(p),r=el('div','row');r.style.marginTop='12px';
+var e=el('button','btn','Editar');e.type='button';e.onclick=function(){editaP(p.id)};
+var o=el('button','btn',p.visivel?'Ocultar':'Mostrar');o.type='button';o.onclick=function(){p.visivel=!p.visivel;marcar('proj');dp()};
+var x=el('button','btn d','Excluir');x.type='button';x.onclick=function(){if(confirm('Excluir "'+p.titulo+'"?')){D.proj.items=L.filter(function(i){return i.id!==p.id});marcar('proj');dp()}};
+r.append(e,o,x);c.appendChild(r);g.appendChild(c)})}
+function editaP(id){var p=D.proj.items.find(function(i){return i.id===id});if(!p)return;
+$('pid').value=p.id;$('titulo').value=p.titulo;$('desc').value=p.desc;$('cat').value=p.categoria;$('status2').value=p.status;$('tec').value=p.tec;$('link').value=p.link;$('vis').checked=p.visivel;
+$('ft').textContent='Editar projeto';$('sp').textContent='Salvar alterações';$('cp').hidden=false;$('titulo').focus();scrollTo({top:0})}
+$('fp').addEventListener('submit',function(e){e.preventDefault();
+var t=$('titulo').value.trim(),lk=$('link').value.trim();
+if(!t){$('mp').textContent='Digite o título do projeto.';return}
+if(lk&&!linkOk(lk)){$('mp').textContent='O link precisa começar com http:// ou https://.';return}
+var d={titulo:t,desc:$('desc').value.trim(),categoria:$('cat').value,status:$('status2').value,tec:$('tec').value.trim(),link:lk,visivel:$('vis').checked},id=+$('pid').value;
+if(id){D.proj.items=D.proj.items.map(function(p){return p.id===id?Object.assign(p,d):p})}else{d.id=prox();D.proj.items.push(d)}
+marcar('proj');limpaP();dp()});
+$('cp').onclick=limpaP;
+function slug(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'cert'}
+function processa(f){return new Promise(function(ok,no){
+if(f.size>5*1024*1024)return no(new Error('O arquivo tem mais de 5 MB. Reduza e tente de novo.'));
+var fr=new FileReader();fr.onerror=function(){no(new Error('Não foi possível ler o arquivo.'))};
+fr.onload=function(){
+if(f.type==='application/pdf')return ok({ext:'.pdf',b64:fr.result.split(',')[1],url:''});
+if(!/^image\//.test(f.type))return no(new Error('Use uma imagem (JPG ou PNG) ou um PDF.'));
+var im=new Image();im.onerror=function(){no(new Error('Imagem inválida.'))};
+im.onload=function(){var w=Math.min(1100,im.width),h=Math.round(im.height*w/im.width),c=document.createElement('canvas');c.width=w;c.height=h;var x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);var u=c.toDataURL('image/jpeg',.75);ok({ext:'.jpg',b64:u.split(',')[1],url:u})};
+im.src=fr.result};fr.readAsDataURL(f)})}
+function limpaC(){$('fc').reset();$('cid').value='';$('ft2').textContent='Novo certificado';$('sc').textContent='Adicionar certificado';$('cc').hidden=true;$('mc').textContent='';$('ci').textContent=''}
+function dc(){
+var g=$('lc');g.replaceChildren();var L=D.cert.items;
+if(!L.length){g.appendChild(el('p',null,'Nenhum certificado ainda. Use o formulário acima para adicionar o primeiro.'));return}
+L.forEach(function(c){
+var b=el('div','box');b.appendChild(el('h3',null,c.titulo));b.appendChild(el('p','small',c.org+' · '+c.horas+'h'));
+if(/\.pdf$/i.test(c.img)){b.appendChild(el('p','tag','PDF'))}else{var i=el('img');i.src=NOVOS[c.img]?NOVOS[c.img].url:c.img;i.alt='Miniatura de '+c.titulo;i.style.cssText='width:100%;max-height:150px;object-fit:contain;background:#fff;border:2px solid var(--ink)';b.appendChild(i)}
+var r=el('div','row');r.style.marginTop='12px';
+var e=el('button','btn','Editar');e.type='button';e.onclick=function(){editaC(c.id)};
+var x=el('button','btn d','Excluir');x.type='button';x.onclick=function(){if(confirm('Excluir "'+c.titulo+'"?')){if(NOVOS[c.img]&&!NOVOS[c.img].enviado)delete NOVOS[c.img];D.cert.items=L.filter(function(i){return i.id!==c.id});marcar('cert');dc()}};
+r.append(e,x);b.appendChild(r);g.appendChild(b)})}
+function editaC(id){var c=D.cert.items.find(function(i){return i.id===id});if(!c)return;
+$('cid').value=c.id;$('ct').value=c.titulo;$('co').value=c.org;$('ch').value=c.horas;$('cd').value=c.desc;$('ce').value=c.descEn||'';
+$('ft2').textContent='Editar certificado';$('sc').textContent='Salvar alterações';$('cc').hidden=false;$('ci').textContent='Deixe o arquivo em branco para manter o atual.';$('ct').focus();scrollTo({top:0})}
+$('fc').addEventListener('submit',async function(e){e.preventDefault();
+var t=$('ct').value.trim(),o=$('co').value.trim(),h=+$('ch').value,f=$('cf').files[0],id=$('cid').value,m=$('mc');
+if(!t||!o||!h){m.textContent='Preencha título, instituição e carga horária.';return}
+if(!id&&!f){m.textContent='Escolha o arquivo do certificado.';return}
+var d={titulo:t,org:o,horas:h,desc:$('cd').value.trim(),descEn:$('ce').value.trim()};
+try{
+if(f){var a=await processa(f),pth='certificados/'+slug(t)+'-'+Date.now().toString(36)+a.ext;NOVOS[pth]={b64:a.b64,url:a.url};d.img=pth}
+}catch(x){m.textContent=x.message;return}
+if(id){D.cert.items=D.cert.items.map(function(c){if(c.id!==id)return c;if(d.img&&NOVOS[c.img]&&!NOVOS[c.img].enviado)delete NOVOS[c.img];return Object.assign(c,d)})}
+else{d.id=slug(t)+'-'+Date.now().toString(36);D.cert.items.push(d)}
+marcar('cert');limpaC();dc()});
+$('cc').onclick=limpaC;
+</script>
+</body>
+</html>

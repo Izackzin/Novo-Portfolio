@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Área restrita — Isaac Ramos</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="painel.css">
+</head>
+<body>
+<main class="wrap" style="max-width:520px;padding-top:10vh">
+<p><a href="index.html">← Voltar ao site</a></p>
+<div class="box">
+<h1>Área restrita</h1>
+<p style="margin-top:10px">Entre com o seu token de acesso do GitHub para gerenciar projetos e certificados. Só quem tem permissão no repositório consegue publicar.</p>
+<form id="f" novalidate>
+<label for="t">Token de acesso do GitHub</label>
+<input id="t" type="password" autocomplete="off" spellcheck="false" required>
+<label style="display:flex;gap:10px;align-items:center;font-weight:500"><input id="l" type="checkbox" style="width:auto"> Manter conectado neste navegador</label>
+<p class="msg" id="m" role="alert"></p>
+<button class="btn p" id="b" type="submit">Entrar</button>
+</form>
+<details style="margin-top:18px"><summary style="cursor:pointer;font-weight:600">Como criar o token</summary>
+<ol class="small">
+<li>No GitHub, abra <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens</b>.</li>
+<li>Clique em <b>Generate new token</b> e escolha o prazo de validade.</li>
+<li>Em <b>Repository access</b>, selecione só o repositório do portfólio.</li>
+<li>Em <b>Permissions → Repository permissions</b>, defina <b>Contents</b> como <b>Read and write</b>.</li>
+<li>Gere o token, copie e cole aqui. Ele aparece uma vez só.</li>
+</ol></details>
+</div>
+</main>
+<script src="dados.js"></script>
+<script>
+if(token())location.replace('admin.html');
+var m=document.getElementById('m'),b=document.getElementById('b');
+document.getElementById('f').addEventListener('submit',function(e){
+e.preventDefault();
+var t=document.getElementById('t').value.trim();
+if(!t){m.textContent='Cole o token de acesso do GitHub.';return}
+var h={headers:{Authorization:'Bearer '+t,Accept:'application/vnd.github+json'}};
+b.disabled=true;m.textContent='Verificando…';
+fetch('https://api.github.com/user',h).then(function(r){
+if(r.status===401)throw new Error('Token inválido ou expirado. Gere um novo e tente de novo.');
+return r.json()}).then(function(u){
+if(String(u.login).toLowerCase()!==OWNER.toLowerCase())throw new Error('Esse token pertence a outra conta do GitHub.');
+return fetch('https://api.github.com/repos/'+OWNER+'/'+REPO,h)}).then(function(r){
+if(r.status===404)throw new Error('Repositório '+OWNER+'/'+REPO+' não encontrado ou sem acesso. Confira o nome em dados.js e as permissões do token.');
+return r.json()}).then(function(j){
+if(!j.permissions||!j.permissions.push)throw new Error('O token não tem permissão de escrita (Contents: Read and write) neste repositório.');
+(document.getElementById('l').checked?localStorage:sessionStorage).setItem(TOKEN_KEY,t);
+location.href='admin.html'}).catch(function(x){m.textContent=x.message==='Failed to fetch'?'Sem conexão com o GitHub. Verifique sua internet.':x.message;b.disabled=false});
+});
+</script>
+</body>
+</html>
